@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoryTable extends Migration {
+class MediasTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,15 @@ class CategoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categories', function(Blueprint $table)
+		Schema::create('medias', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('title', 50);
-			$table->string('slug', 50);
-			$table->tinyInteger('category_status');
+			$table->string('media_type', 50);
+			$table->string('title', 100);
+			$table->string('slug', 100);
+			$table->text('media_content');
+			$table->string('media_img');
+			$table->tinyInteger('media_status');
 			$table->text('meta_description')->nullable();
 			$table->string('meta_keywords')->nullable();
 			$table->timestamps();
@@ -31,7 +34,7 @@ class CategoryTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('categories');
+		Schema::drop('medias');
 	}
 
 }

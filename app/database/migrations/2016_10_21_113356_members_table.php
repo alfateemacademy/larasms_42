@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CategoryTable extends Migration {
+class MembersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,14 @@ class CategoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('categories', function(Blueprint $table)
+		Schema::create('members', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('title', 50);
-			$table->string('slug', 50);
-			$table->tinyInteger('category_status');
-			$table->text('meta_description')->nullable();
-			$table->string('meta_keywords')->nullable();
+			$table->string('fullname', 100);
+			$table->string('email', 100);
+			$table->string('password', 100);
+			$table->string('member_img');
+			$table->tinyInteger('member_status');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +31,7 @@ class CategoryTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('categories');
+		Schema::drop('members');
 	}
 
 }
