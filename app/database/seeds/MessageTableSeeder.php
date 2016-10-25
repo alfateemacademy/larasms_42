@@ -23,8 +23,8 @@ class MessageTableSeeder extends Seeder {
 	        	'message_status' => $faker->numberBetween(0,1),
 	        	'created_at' => date('Y-m-d h:i:s'),
 	        	'updated_at' => date('Y-m-d h:i:s')
-	        )); 
- 
+	        ));
+  
     	}
     }
 

@@ -1,17 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::group(['prefix' => 'admin'], function() {
+	Route::get('category', 'AdminCategoryController@index');
+	Route::get('category/create', 'AdminCategoryController@create');
+	Route::get('message', 'AdminCategoryController@index');
 });
+
+Route::group(['prefix' => 'sales'], function() {
+	Route::get('category', 'SalesCategoryController@index');
+	Route::get('category/create', 'SalesCategoryController@create');
+});
+
+
+
+Route::get('message/create', 'AdminCategoryController@create');
+/*Route::get('admin/category', 'AdminCategoryController@index');
+Route::get('admin/category', 'AdminCategoryController@index');
+Route::get('admin/category', 'AdminCategoryController@index');
+Route::get('admin/category', 'AdminCategoryController@index');*/
+
+Route::get('/', 'HomeController@showWelcome');
