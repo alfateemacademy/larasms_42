@@ -9,7 +9,7 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-		return "index page";
+		return View::make('admin.category.index');
 	}
 
 
@@ -20,7 +20,7 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function create()
 	{
-		return "create page";
+		return View::make('admin.category.create');
 	}
 
 
@@ -53,9 +53,9 @@ class AdminCategoryController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		//
+		return View::make('admin.category.edit');
 	}
 
 
