@@ -35,7 +35,25 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validator = Validator::make(Input::all(), [
+			'title' => 'required',
+			'category_status' => 'required'
+		]);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		Category::create([
+			'title' => Input::get('title'),
+			'slug' => Str::slug(Input::get('title')),
+			'meta_description' => Input::get('meta_description'),
+			'meta_keywords' => Input::get('meta_keywords'),
+			'category_status' => Input::get('category_status')
+		]);
+
+		return Redirect::route('admin.category.index');
 	}
 
 
