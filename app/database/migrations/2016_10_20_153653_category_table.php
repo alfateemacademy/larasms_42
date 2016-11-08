@@ -15,7 +15,7 @@ class CategoryTable extends Migration {
 		Schema::create('categories', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('title', 50);
+			$table->string('title', 50)->unique();
 			$table->string('slug', 50);
 			$table->tinyInteger('category_status');
 			$table->text('meta_description')->nullable();

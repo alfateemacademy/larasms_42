@@ -15,6 +15,7 @@
 @endsection
 
 @section('content')
+
 <div class="row">
 	<div class="col-md-12">
             <!-- BEGIN Portlet PORTLET-->
@@ -22,7 +23,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-home"></i>
-                        <span class="caption-subject bold uppercase"> Add New Movie</span>
+                        <span class="caption-subject bold uppercase"> Add New Category</span>
                     </div>
                     <div class="actions">
                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
@@ -30,7 +31,7 @@
                 </div>
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    {{ print_r($errors) }}
+                    @include('admin.layouts._partials.errors')
                     {{ Form::open(['route' => 'admin.category.store', 'method' => 'post']) }}
                         <div class="row">
                             <div class="col-md-6">
@@ -57,7 +58,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label">Meta Keywords</label>	
+                                        <label class="control-label">Status</label>	
                                         {{ Form::select('category_status', ['' => 'Select Status', 1 => 'Active', 0 => 'Deactive'], null, ['class' => 'form-control']) }}
                                     </div>
                                     

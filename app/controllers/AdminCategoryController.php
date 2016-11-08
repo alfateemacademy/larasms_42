@@ -36,7 +36,7 @@ class AdminCategoryController extends \BaseController {
 	public function store()
 	{
 		$validator = Validator::make(Input::all(), [
-			'title' => 'required',
+			'title' => 'required|unique:categories',
 			'category_status' => 'required'
 		]);
 
@@ -77,7 +77,10 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('admin.category.edit');
+		$category = Category::find($id);
+
+		return View::make('admin.category.edit')
+			->with('category', $category);
 	}
 
 
@@ -89,7 +92,28 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		
+		$validator = Validator::make(Input::all(), [
+			'title' => 'required|unique:categories,title,' . $id,
+			'category_status' => 'required'
+		]);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$category = Category::find($id);
+
+		$category->update([
+			'title' => Input::get('title'),
+			'slug' => Str::slug(Input::get('title')),
+			'meta_description' => Input::get('meta_description'),
+			'meta_keywords' => Input::get('meta_keywords'),
+			'category_status' => Input::get('category_status')
+		]);
+
+		return Redirect::route('admin.category.index');
 	}
 
 
