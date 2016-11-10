@@ -21,8 +21,6 @@
                         <span class="caption-subject bold uppercase"> Manage Categories</span>
                     </div>
                     <div class="actions">
-                        <a href="/admin/category/trash" class="btn red btn-circle btn-outline sbold">
-                            <i class="fa fa-trash-o"></i> Trash </a>
                         <a href="/admin/category/create" class="btn blue btn-circle btn-outline sbold">
                             <i class="fa fa-plus"></i> Add </a>
                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
@@ -48,13 +46,14 @@
 	                            <td class="text-center">{{ $category->category_status }}</td>
 	                            <td>{{ $category->created_at }}</td>
 	                            <td class="text-center">
-                                    {{ Form::open(['route' => ['admin.category.destroy', $category->id], 'method' => 'DELETE']) }}
-                                        <a href="/admin/category/{{ $category->id }}/edit"
-                                           class="btn btn-outline btn-circle btn-sm purple">
-                                            <i class="fa fa-edit"></i> Edit </a>
-
-                                        <button type="submit" class="btn btn-outline btn-circle dark btn-sm red">
-                                            <i class="fa fa-trash-o"></i> Delete
+                                    {{ Form::open(['route' => ['admin.category.restore', $category->id], 'method' => 'DELETE']) }}
+                                        <button type="submit" class="btn btn-outline btn-circle dark btn-sm green">
+                                            <i class="fa fa-refresh"></i> Restore
+                                        </button>
+                                    {{ Form::close() }}
+                                    {{ Form::open(['route' => ['admin.category.force', $category->id], 'method' => 'DELETE']) }}
+                                        <button type="submit" class="btn btn-outline btn-circle dark btn-sm green">
+                                            <i class="fa fa-trash-o"></i> Permanent Delete
                                         </button>
                                     {{ Form::close() }}
 	                            </td>

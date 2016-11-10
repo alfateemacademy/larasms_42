@@ -2,6 +2,8 @@
 
 class Category extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	protected $fillable = [
 		'title', 
 		'slug', 

@@ -16,6 +16,15 @@ class AdminCategoryController extends \BaseController {
 			->with('categories', $categories);
 	}
 
+	public function trash()
+	{
+		//$categories = Category::get();
+		$categories = Category::onlyTrashed()->paginate();
+
+		return View::make('admin.category.trash')
+			->with('categories', $categories);
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -125,7 +134,29 @@ class AdminCategoryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$category = Category::find($id);
+
+		$category->delete();
+
+		return Redirect::route('admin.category.index');
+	}
+
+	public function restore($id)
+	{
+		$category = Category::onlyTrashed()->find($id);
+
+		$category->restore();
+
+		return Redirect::route('admin.category.trash');
+	}
+
+	public function force($id)
+	{
+		$category = Category::onlyTrashed()->find($id);
+
+		$category->forceDelete();
+
+		return Redirect::route('admin.category.trash');
 	}
 
 

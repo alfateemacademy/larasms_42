@@ -2,6 +2,19 @@
 
 
 Route::group(['prefix' => 'admin'], function() {
+
+	Route::delete('category/{category}/restore', [
+		'as' => 'admin.category.restore', 
+		'uses' => 'AdminCategoryController@restore'
+	]);
+	Route::delete('category/{category}/force', [
+		'as' => 'admin.category.force', 
+		'uses' => 'AdminCategoryController@force'
+	]);
+	Route::get('category/trash', [
+		'as' => 'admin.category.trash', 
+		'uses' => 'AdminCategoryController@trash'
+	]);
 	Route::resource('category', 'AdminCategoryController');
 	// index, create, store, edit, update, destroy
 	/*Route::get('category', 'AdminCategoryController@index');
