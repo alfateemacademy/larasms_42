@@ -1,0 +1,85 @@
+@extends('admin.layouts.master')
+
+@section('page-title')
+	Add Message
+@endsection
+
+@section('breadcrumb')
+	<li>
+        <a href="/admin/message">Messages</a>
+        <i class="fa fa-angle-right"></i>
+    </li>
+    <li><span>Add Message</span></li>
+@endsection
+
+@section('content')
+	<div class="row">
+	<div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-home"></i>
+                        <span class="caption-subject bold uppercase"> Add New Message</span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    @include('admin.layouts._partials.errors')
+                    {{ Form::open(['route' => 'admin.message.store', 'method' => 'post']) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        <label class="control-label">Select Category</label>
+                                        {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Title</label>
+                                        {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title	']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Message</label>
+                                        {{ Form::textarea('message_content', null, ['class' => 'form-control', 'placeholder' => 'Message']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Meta Description</label>
+                                        {{ Form::textarea('meta_description', null, ['class' => 'form-control', 'placeholder' => 'Meta Description']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Meta Keywords</label>
+                                        {{ Form::text('meta_keywords', null, ['class' => 'form-control', 'placeholder' => 'Meta Keywords']) }}
+                                    </div>
+
+									<div class="form-group">
+                                        <label class="control-label">Status</label>	
+                                        {{ Form::select('message_status', ['' => 'Select Status', 1 => 'Active', 0 => 'Deactive'], null, ['class' => 'form-control']) }}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <a href="/admin/message" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    {{ Form::close() }}
+                    <!-- END FORM-->
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
+        </div>
+        </div>
+@endsection

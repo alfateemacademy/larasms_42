@@ -10,7 +10,7 @@ class AdminCategoryController extends \BaseController {
 	public function index()
 	{
 		//$categories = Category::get();
-		$categories = Category::paginate();
+		$categories = Category::with('messages')->paginate(50);
 
 		return View::make('admin.category.index')
 			->with('categories', $categories);

@@ -1,13 +1,11 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-	Categories
+	Messages
 @endsection
 
 @section('breadcrumb')
-	<li>
-		<span>Categories</span>
-	</li>
+	<li><span>Messages</span></li>
 @endsection
 
 @section('content')
@@ -18,12 +16,10 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-home"></i>
-                        <span class="caption-subject bold uppercase"> Manage Categories</span>
+                        <span class="caption-subject bold uppercase"> Manage messages</span>
                     </div>
                     <div class="actions">
-                        <a href="/admin/category/trash" class="btn red btn-circle btn-outline sbold">
-                            <i class="fa fa-trash-o"></i> Trash </a>
-                        <a href="/admin/category/create" class="btn blue btn-circle btn-outline sbold">
+                        <a href="/admin/message/create" class="btn blue btn-circle btn-outline sbold">
                             <i class="fa fa-plus"></i> Add </a>
                         <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
                     </div>
@@ -33,25 +29,27 @@
                         <thead class="flip-content">
                         <tr>
                             <th>ID</th>
-                            <th>Category</th>
-                            <th># Messages</th>
-                            <th class="text-center">Status</th>
+                       		<th>Category</th>
+                            <th>Title</th>
+                            <th>View</th>
+							<th class="text-center">Status</th>
                             <th>Date</th>
                             <th class="text-center"></th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        	@foreach($categories as $category)
+                        	@foreach($messages as $message)
 							<tr>
-	                            <td>{{ $category->id }}</td>
-	                            <td>{{ $category->title }}</td>
-                                <td>{{ count($category->messages) }} </td>
-	                            <td class="text-center">{{ $category->category_status }}</td>
-	                            <td>{{ $category->created_at }}</td>
+	                            <td>{{ $message->id }}</td>
+	                            <td>{{ $message->category->title }}</td>
+	                            <td>{{ $message->title }}</td>
+	                            <td>{{ $message->views }}</td>
+	                           	<td class="text-center">{{ $message->message_status }}</td>
+	                            <td>{{ $message->created_at }}</td>
 	                            <td class="text-center">
-                                    {{ Form::open(['route' => ['admin.category.destroy', $category->id], 'method' => 'DELETE']) }}
-                                        <a href="/admin/category/{{ $category->id }}/edit"
+                                    {{ Form::open(['route' => ['admin.message.destroy', $message->id], 'method' => 'DELETE']) }}
+                                        <a href="/admin/message/{{ $message->id }}/edit"
                                            class="btn btn-outline btn-circle btn-sm purple">
                                             <i class="fa fa-edit"></i> Edit </a>
 
@@ -66,7 +64,7 @@
                         
                     </table>
 					
-                    {{ $categories->links() }}
+                    {{ $messages->links() }}
 
                 </div>
             </div>
