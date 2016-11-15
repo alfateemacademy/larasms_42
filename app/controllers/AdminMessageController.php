@@ -37,7 +37,24 @@ class AdminMessageController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validator = Validator::make(Input::all(), [
+			'title' => 'required',
+			'message_content' => 'required',
+			'message_status' => 'required'
+		]);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$input = Input::all();
+		$input['slug'] = Str::slug(Input::get('title')); // Add new key into existing array
+		// unset($input['slug']); // If you want to remove any array key
+
+		Message::create($input);
+
+		return Redirect::route('admin.message.index');
 	}
 
 
@@ -61,7 +78,12 @@ class AdminMessageController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$categories = Category::lists('title', 'id');
+		$message = Message::find($id);
+
+		return View::make('admin.message.edit')
+			->with('categories', $categories)
+			->with('message', $message);
 	}
 
 
@@ -73,7 +95,27 @@ class AdminMessageController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$validator = Validator::make(Input::all(), [
+			'title' => 'required',
+			'message_content' => 'required',
+			'message_status' => 'required'
+		]);
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$message = Message::find($id);
+
+		$input = Input::all();
+		$input['slug'] = Str::slug(Input::get('title'));
+
+		$message->update($input);
+
+		return Redirect::route('admin.message.index');
+
+
 	}
 
 
@@ -85,7 +127,13 @@ class AdminMessageController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$message = Message::find($id);
+
+		$message->forceDelete();
+
+		return Redirect::route('admin.message.index');
+
+
 	}
 
 

@@ -35,6 +35,11 @@
                                 <div class="form-body">
 
                                     <div class="form-group">
+                                        <label class="control-label">Select Category</label>
+                                        {{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}
+                                    </div>
+
+                                    <div class="form-group">
                                         <label class="control-label">Title</label>
                                         {{ Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title	']) }}
                                     </div>
