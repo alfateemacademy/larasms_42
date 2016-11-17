@@ -12,7 +12,7 @@ class MessageTableSeeder extends Seeder {
     	{
     		$title = $faker->sentence(3);
 	        DB::table('messages')->insert(array(
-	        	'category_id' => array_rand($categoryIds),
+	        	'category_id' => $categoryIds[mt_rand(0, count($categoryIds) - 1)], //array_rand($categoryIds),
 	        	//'category_id' => $faker->numberBetween(1,50),
 	        	'title' => $title,
 	        	'slug' => Str::slug($title),

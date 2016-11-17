@@ -21,6 +21,8 @@ class CategoryTable extends Migration {
 			$table->text('meta_description')->nullable();
 			$table->string('meta_keywords')->nullable();
 			$table->timestamps();
+
+			
 		});
 	}
 

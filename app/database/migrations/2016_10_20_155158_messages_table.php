@@ -15,7 +15,7 @@ class MessagesTable extends Migration {
 		Schema::create('messages', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('category_id');
+			$table->integer('category_id')->unsigned();
 			$table->string('title', 100);
 			$table->string('slug', 100);
 			$table->text('message_content');
