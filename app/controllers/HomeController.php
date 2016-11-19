@@ -2,20 +2,10 @@
 
 class HomeController extends BaseController {
 
-	public function showWelcome()
+	
+	public function index()
 	{
-		return "Welcome Page";
-		//return View::make('hello');
-	}
-
-	public function about() {
-
-		return "About Page";
-	}
-
-	public function contact() {
-
-		return "Contact Page";
+		return View::make('front.home.index');
 	}
 
 

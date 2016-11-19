@@ -24,4 +24,4 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::get('category/edit', 'AdminCategoryController@edit');*/
 });
 
-Route::get('/', 'HomeController@showWelcome');
+Route::get('/', 'HomeController@index');

@@ -27,6 +27,7 @@
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll">
+                    @include('admin.layouts._partials.errors')
                     <table class="table table-striped table-condensed flip-content" id="tableResellers">
                         <thead class="flip-content">
                         <tr>

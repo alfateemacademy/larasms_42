@@ -152,9 +152,21 @@ class AdminCategoryController extends \BaseController {
 
 	public function force($id)
 	{
-		$category = Category::onlyTrashed()->find($id);
+		$category = Category::onlyTrashed()->find($id);	
 
-		$category->forceDelete();
+		DB::beginTransaction();
+
+		try {
+
+			$category->forceDelete();
+			// $category->messages()->forceDelete();
+
+			DB::commit();
+		}
+		catch (\Exception $ex) {
+			DB::rollback();
+			return Redirect::back()->withErrors($ex->getMessage());
+		}
 
 		return Redirect::route('admin.category.trash');
 	}
