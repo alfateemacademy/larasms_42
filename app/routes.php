@@ -18,6 +18,7 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::resource('category', 'AdminCategoryController');
 
 	Route::resource('message', 'AdminMessageController');
+	Route::resource('user', 'AdminUserController');
 	// index, create, store, edit, update, destroy
 	/*Route::get('category', 'AdminCategoryController@index');
 	Route::get('category/create', 'AdminCategoryController@create');
