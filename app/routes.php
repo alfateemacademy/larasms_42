@@ -1,7 +1,26 @@
 <?php
 
-
 Route::group(['prefix' => 'admin'], function() {
+	Route::get('login', [
+		'as' => 'admin.auth.login', 
+		'uses' => 'AdminAuthController@login'
+	]);
+
+	Route::post('login', [
+		'as' => 'admin.auth.post-login', 
+		'uses' => 'AdminAuthController@postLogin'
+	]);
+
+	Route::get('logout', [
+		'as' => 'admin.auth.logout', 
+		'uses' => 'AdminAuthController@logout'
+	]);
+});
+
+Route::group(['prefix' => 'admin', 'before' => 'auth'], function() {
+
+	
+
 
 	Route::delete('category/{category}/restore', [
 		'as' => 'admin.category.restore', 
@@ -19,6 +38,10 @@ Route::group(['prefix' => 'admin'], function() {
 
 	Route::resource('message', 'AdminMessageController');
 	Route::resource('user', 'AdminUserController');
+	Route::get('/', [
+		'as' => 'admin.dashboard', 
+		'uses' => 'AdminHomeController@dashboard'
+	]);
 	// index, create, store, edit, update, destroy
 	/*Route::get('category', 'AdminCategoryController@index');
 	Route::get('category/create', 'AdminCategoryController@create');
