@@ -39,7 +39,8 @@ class AdminUserController extends \BaseController {
 			'name' => 'required',
 			'email' => 'required|email|unique:users',
 			'password' => 'required|confirmed',
-			'user_status' => 'required'
+			'user_status' => 'required',
+			'avatar' => 'image'
 		]);
 
 		if($validator->fails())
@@ -47,7 +48,16 @@ class AdminUserController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+		$fileName = null;
+		if(Input::hasFile('avatar'))
+		{
+			$file = Input::file('avatar');
+			$fileName = md5($file->getClientOriginalName() . time()) . "." . $file->getClientOriginalExtension();
+			$file->move('uploads/avatar', $fileName);
+		}
+
 		$input = Input::all();
+		$input['avatar'] = $fileName;
 		$input['password'] = Hash::make(Input::get('password'));
 
 		User::create($input);
@@ -126,6 +136,13 @@ class AdminUserController extends \BaseController {
 	public function destroy($id)
 	{
 		$user = User::find($id);
+		
+		$fileName = 'uploads/avatar/' . $user->avatar;
+
+		if(File::exists($fileName))
+		{
+			File::delete($fileName);
+		}
 
 		$user->delete();
 

@@ -19,9 +19,6 @@ Route::group(['prefix' => 'admin'], function() {
 
 Route::group(['prefix' => 'admin', 'before' => 'auth'], function() {
 
-	
-
-
 	Route::delete('category/{category}/restore', [
 		'as' => 'admin.category.restore', 
 		'uses' => 'AdminCategoryController@restore'

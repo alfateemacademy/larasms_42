@@ -32,7 +32,7 @@
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
                     @include('admin.layouts._partials.errors')
-                    {{ Form::open(['route' => 'admin.user.store', 'method' => 'post']) }}
+                    {{ Form::open(['route' => 'admin.user.store', 'method' => 'post', 'files' => true]) }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-body">
@@ -55,6 +55,11 @@
                                     <div class="form-group">
                                         <label class="control-label">Re-type Password</label>
                                         {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label">Select Your Image</label>
+                                        {{ Form::file('avatar', ['class' => 'form-control']) }}
                                     </div>
 
                                     <div class="form-group">
