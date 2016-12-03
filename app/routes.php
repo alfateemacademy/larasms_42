@@ -45,4 +45,8 @@ Route::group(['prefix' => 'admin', 'before' => 'auth'], function() {
 	Route::get('category/edit', 'AdminCategoryController@edit');*/
 });
 
+Route::get('/message/{slug}', [
+	'as' => 'message.detail', 
+	'uses' => 'MessageController@detail'
+]);
 Route::get('/', 'HomeController@index');
