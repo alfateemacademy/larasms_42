@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin'], function() {
 	]);
 });
 
-Route::group(['prefix' => 'admin', 'before' => 'auth'], function() {
+Route::group(['prefix' => 'admin'], function() {
 
 	Route::delete('category/{category}/restore', [
 		'as' => 'admin.category.restore', 
@@ -45,6 +45,14 @@ Route::group(['prefix' => 'admin', 'before' => 'auth'], function() {
 	Route::get('category/edit', 'AdminCategoryController@edit');*/
 });
 
+Route::get('logout', [
+		'as' => 'auth.logout', 
+		'uses' => 'HomeController@logout'
+	]);
+Route::post('/message/{messageId}/comment', [
+	'as' => 'comment.store', 
+	'uses' => 'MessageController@postComment'
+]);
 Route::get('/message/{slug}', [
 	'as' => 'message.detail', 
 	'uses' => 'MessageController@detail'

@@ -6,4 +6,11 @@ class HomeController extends BaseController {
 	{
 		return View::make('front.home.index');
 	}
+
+	public function logout()
+	{
+		Auth::logout();
+
+		return Redirect::back();
+	}
 }

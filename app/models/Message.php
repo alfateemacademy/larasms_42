@@ -19,5 +19,10 @@ class Message extends Eloquent {
 	{
 		return $this->belongsTo('Category', 'category_id');
 	}	
+
+	public function comments()
+	{
+		return $this->hasMany('Comment', 'message_id');
+	}
 	
 }
