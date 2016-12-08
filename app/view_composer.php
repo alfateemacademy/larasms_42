@@ -7,11 +7,6 @@ View::composer(['front.home.*', 'front.message.*'], function($view) {
 			->take(5)
 			->get();
 
-	$latestMessages = Message::where('message_status', 1)
-		->orderBy('created_at', 'DESC')
-		->paginate(5);
-
     $view->with('categories', $categories)
-    	->with('popularMessages', $popularMessages)
-    	->with('latestMessages', $latestMessages);
+    	->with('popularMessages', $popularMessages);
 });
