@@ -53,6 +53,14 @@ Route::post('/message/{messageId}/comment', [
 	'as' => 'comment.store', 
 	'uses' => 'MessageController@postComment'
 ]);
+Route::get('/category/{slug}', [
+	'as' => 'category.detail', 
+	'uses' => 'CategoryController@detail'
+]);
+Route::get('/user/{username}', [
+	'as' => 'user.detail', 
+	'uses' => 'HomeController@userMessages'
+]);
 Route::get('/message/{slug}', [
 	'as' => 'message.detail', 
 	'uses' => 'MessageController@detail'

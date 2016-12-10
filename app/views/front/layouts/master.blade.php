@@ -64,7 +64,7 @@
 <div class="b-inner-page-header f-inner-page-header b-bg-header-inner-page">
   <div class="b-inner-page-header__content">
     <div class="container">
-      <h1 class="f-primary-l c-default">Blog Listing Left Sidebar</h1>
+      <h1 class="f-primary-l c-default">@yield('page-title')</h1>
     </div>
   </div>
 </div>
@@ -91,8 +91,10 @@
                     <div class="row">
     <div class="col-md-12">
         <div class="b-form-row b-input-search">
-            <input class="form-control" type="text" placeholder="Enter your keywords"/>
-            <span class="b-btn b-btn-search f-btn-search fa fa-search fa-2x"></span>
+            {{ Form::open(['url' => '/', 'method' => 'GET']) }}
+            <input class="form-control" value="{{ Input::get('q') }}" type="text" name="q" placeholder="Enter your keywords"/>
+            <button type="submit" class="b-btn b-btn-search f-btn-search fa fa-search fa-2x"></button>
+            {{ Form::close() }}
         </div>
     </div>
 </div>
@@ -101,15 +103,15 @@
         <div class="b-categories-filter">
             <h4 class="f-primary-b b-h4-special f-h4-special--gray f-h4-special">blog categories</h4>
             <ul>
-    @foreach($categories as $category)
-        @if(count($category->messages) > 0)
-        <li>
-            <a class="f-categories-filter_name" href="#"><i class="fa fa-plus"></i> {{ str_limit($category->title, 25) }}</a>
-            <span class="b-categories-filter_count f-categories-filter_count">{{ count($category->messages) }}</span>
-        </li>
-        @endif
-    @endforeach
-</ul>
+              @foreach($categories as $category)
+                  @if(count($category->messages) > 0)
+                  <li>
+                      <a class="f-categories-filter_name" href="{{ route('category.detail', $category->slug) }}"><i class="fa fa-plus"></i> {{ str_limit($category->title, 25) }}</a>
+                      <span class="b-categories-filter_count f-categories-filter_count">{{ count($category->messages) }}</span>
+                  </li>
+                  @endif
+              @endforeach
+          </ul>
         </div>
     </div>
     <div class="col-md-12">
@@ -122,7 +124,7 @@
     <div class="b-blog-short-post--popular col-md-12  col-xs-12 f-primary-b">
         <div class="b-remaining">
             <div class="b-blog-short-post__item_text f-blog-short-post__item_text">
-                <a href="#">{{ $popularMessage->title }}</a>
+                <a href="{{ route('message.detail', $popularMessage->slug) }}">{{ $popularMessage->title }}</a>
                 <div class="short-content">
                     {{ str_limit($popularMessage->message_content, 100) }}
                 </div>

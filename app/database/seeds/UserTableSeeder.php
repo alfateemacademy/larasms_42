@@ -11,6 +11,7 @@ class UserTableSeeder extends Seeder {
     		
 	        DB::table('users')->insert(array(
 	        	'name' => $faker->name,
+	        	'username' => $faker->username,
 	        	'email' => $faker->email,
 	        	'password' => Hash::make('abc123'),
 	        	'user_status' => 1,

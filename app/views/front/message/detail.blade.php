@@ -1,5 +1,9 @@
 @extends('front.layouts.master')
 
+@section('page-title')
+{{ $message->title }}
+@endsection
+
 @section('content')
     <div class="b-blog-listing__block">
         <div class="b-blog-listing__block-top">

@@ -7,9 +7,14 @@ class CategoryController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function detail($slug)
 	{
-		//
+		$category = Category::where('slug', $slug)->first();
+		$messages = Message::where('category_id', $category->id)->paginate(1);
+
+		return View::make('front.category.detail')
+			->with('category', $category)
+			->with('messages', $messages);
 	}
 
 

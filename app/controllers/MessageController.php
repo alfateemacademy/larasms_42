@@ -16,6 +16,7 @@ class MessageController extends \BaseController {
 		}])->where('slug', $slug)->first();*/
 
 		$message = Message::where('slug', $slug)->first();
+		$message->increment('views');
 		$comments  = Comment::where('message_id', $message->id)
 			->where('comment_status', 1)
 			->get();

@@ -16,6 +16,7 @@ class UsersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 100);
+			$table->string('username', 50);
 			$table->string('email', 100);
 			$table->string('password', 100);
 			$table->string('avatar')->nullable();
